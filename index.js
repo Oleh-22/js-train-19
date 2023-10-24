@@ -130,38 +130,27 @@ console.log(Novel.isPrototypeOf(Biography));
 const ScienceBook = Object.create(Book);
 
 Object.defineProperty(ScienceBook, "info", {
-  value: "написана в 1915 році",
-  writable: false,
-  enumerable: false,
-  configurable: false,
-});
-
-Object.defineProperty(ScienceBook, "setInfo", {
-  set: function (newInfo) {
-    this.info = newInfo;
-  },
-});
-
-Object.defineProperty(ScienceBook, "getInfo", {
-  get: function () {
-    return `Про книгу "${this.title}": ${this.info}`;
-  },
-});
+    configurable: false,
+    set(value) {
+      this._info = value;
+    },
+    get() {
+      return `Про книгу ${this.title}: ${this._info}`;
+    },
+  });
 
 ScienceBook.title = "Фізика 101";
 ScienceBook.author = "Альберт Ейнштейн";
+ScienceBook.info = "написана в 1915 році";
 
 console.log("Завдання: 4 ==============================");
 // Виводимо в консоль властивість info
 
 // Виводимо в консоль налаштування властивости info
 
-console.log(ScienceBook.getInfo);
+console.log(ScienceBook.info);
 
 console.log(Object.getOwnPropertyDescriptor(ScienceBook, "info"));
-console.log(Object.getOwnPropertyDescriptor(ScienceBook, "setInfo"));
-console.log(Object.getOwnPropertyDescriptor(ScienceBook, "getInfo"));
-
 
 // 5. Поліморфізм: створення нового об'єкта та перевизначення його методу
 /*
